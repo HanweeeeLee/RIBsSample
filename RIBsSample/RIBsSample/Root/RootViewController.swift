@@ -24,3 +24,10 @@ final class RootViewController: UIViewController, RootPresentable, RootViewContr
         self.view.backgroundColor = .white
     }
 }
+
+extension RootViewController {
+    func present(viewController: ViewControllable) {
+        viewController.uiviewController.modalPresentationStyle = .fullScreen
+        self.present(viewController.uiviewController, animated: true, completion: nil)
+    }
+}
