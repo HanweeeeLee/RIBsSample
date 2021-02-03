@@ -31,9 +31,10 @@ final class LoggedInBuilder: Builder<LoggedInDependency>, LoggedInBuildable {
 
     func build(withListener listener: LoggedInListener) -> LoggedInRouting {
         let component = LoggedInComponent(dependency: dependency)
-        let viewController = LoggedInViewController()
-        let interactor = LoggedInInteractor(presenter: viewController)
+        let board = UIStoryboard(name: "LoggedInViewController", bundle: nil)
+        let viewController = board.instantiateViewController(identifier: "LoggedInViewController")
+        let interactor = LoggedInInteractor(presenter: viewController as! LoggedInPresentable)
         interactor.listener = listener
-        return LoggedInRouter(interactor: interactor, viewController: viewController)
+        return LoggedInRouter(interactor: interactor, viewController: viewController as! LoggedInViewControllable)
     }
 }

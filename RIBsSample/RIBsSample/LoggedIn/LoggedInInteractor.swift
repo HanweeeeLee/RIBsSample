@@ -15,10 +15,13 @@ protocol LoggedInRouting: ViewableRouting {
 protocol LoggedInPresentable: Presentable {
     var listener: LoggedInPresentableListener? { get set }
     // TODO: Declare methods the interactor can invoke the presenter to present data.
+    var detachObservable: Observable<Void> { get }
 }
 
 protocol LoggedInListener: class {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    func detachLoggedInRIB()
+    func switchLoggedInToLoggedOut()
 }
 
 final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, LoggedInInteractable, LoggedInPresentableListener {
@@ -35,6 +38,7 @@ final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, Logg
 
     override func didBecomeActive() {
         super.didBecomeActive()
+        bindPresenter()
         // TODO: Implement business logic here.
     }
 
@@ -42,4 +46,15 @@ final class LoggedInInteractor: PresentableInteractor<LoggedInPresentable>, Logg
         super.willResignActive()
         // TODO: Pause any business logic.
     }
+}
+// MARK: - Binding
+private extension LoggedInInteractor {
+  func bindPresenter() {
+    presenter.detachObservable
+      .bind { [weak self] _ in
+//        self?.listener?.detachLoggedInRIB()
+        self?.listener?.switchLoggedInToLoggedOut()
+    }
+    .disposeOnDeactivate(interactor: self)
+  }
 }

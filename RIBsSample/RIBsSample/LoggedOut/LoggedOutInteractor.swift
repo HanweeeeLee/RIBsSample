@@ -21,6 +21,7 @@ protocol LoggedOutPresentable: Presentable {
 protocol LoggedOutListener: class {
     // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
     func detachLoggedOutRIB()
+    func switchLoggedOutToLoggedIn()
 }
 
 final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, LoggedOutInteractable, LoggedOutPresentableListener {
@@ -52,7 +53,8 @@ private extension LoggedOutInteractor {
   func bindPresenter() {
     presenter.detachObservable
       .bind { [weak self] _ in
-        self?.listener?.detachLoggedOutRIB()
+//        self?.listener?.detachLoggedOutRIB()
+        self?.listener?.switchLoggedOutToLoggedIn()
     }
     .disposeOnDeactivate(interactor: self)
   }
