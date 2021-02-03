@@ -10,6 +10,7 @@ import RxSwift
 
 protocol RootRouting: ViewableRouting {
     // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func detachLoggedOutRIB()
 }
 
 protocol RootPresentable: Presentable {
@@ -41,5 +42,12 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
     override func willResignActive() {
         super.willResignActive()
         // TODO: Pause any business logic.
+    }
+}
+
+extension RootInteractor {
+    func detachLoggedOutRIB() {
+        print("떼달라는디?")
+        self.router?.detachLoggedOutRIB()
     }
 }

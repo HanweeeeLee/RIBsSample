@@ -33,7 +33,6 @@ final class LoggedOutBuilder: Builder<LoggedOutDependency>, LoggedOutBuildable {
         let component = LoggedOutComponent(dependency: dependency)
         let board = UIStoryboard(name: "LoggedOutViewController", bundle: nil)
         let viewController = board.instantiateViewController(identifier: "LoggedOutViewController")
-//        let viewController = LoggedOutViewController()
         let interactor = LoggedOutInteractor(presenter: viewController as! LoggedOutPresentable)
         interactor.listener = listener
         return LoggedOutRouter(interactor: interactor, viewController: viewController as! LoggedOutViewControllable)

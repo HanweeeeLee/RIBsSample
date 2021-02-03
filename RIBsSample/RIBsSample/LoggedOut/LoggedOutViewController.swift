@@ -8,6 +8,7 @@
 import RIBs
 import RxSwift
 import UIKit
+import RxCocoa
 
 protocol LoggedOutPresentableListener: class {
     // TODO: Declare properties and methods that the view controller can invoke to perform
@@ -23,15 +24,26 @@ final class LoggedOutViewController: UIViewController, LoggedOutPresentable, Log
     //MARK: property
     weak var listener: LoggedOutPresentableListener?
     
+    private let detachRelay: PublishRelay<Void> = .init()
+    private let disposeBag: DisposeBag = .init()
+    
+    lazy var detachObservable: Observable<Void> = detachRelay.asObservable()
+    
     //MAKR: life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("테스트")
         self.view.backgroundColor = .purple
+        bindView()
     }
     
     //MARK: function
+    
+    func bindView() {
+        logInBtn.rx.tap
+          .bind(to: detachRelay)
+          .disposed(by: disposeBag)
+    }
     
     //MARK: action
     @IBAction func loginAction(_ sender: Any) {

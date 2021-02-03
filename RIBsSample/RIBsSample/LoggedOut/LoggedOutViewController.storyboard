@@ -16,8 +16,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ks-RZ-ndg">
-                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="130.5" y="318.5" width="114" height="30"/>
+                                <state key="normal" title="Switch LoggedIn"/>
                                 <connections>
                                     <action selector="loginAction:" destination="vKn-9P-Ny8" eventType="touchUpInside" id="XOV-8G-ARV"/>
                                 </connections>
