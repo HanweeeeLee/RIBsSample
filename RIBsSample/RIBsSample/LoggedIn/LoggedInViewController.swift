@@ -32,7 +32,7 @@ final class LoggedInViewController: UIViewController, LoggedInPresentable, Logge
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .purple
+        self.view.backgroundColor = .orange
         bindView()
     }
     

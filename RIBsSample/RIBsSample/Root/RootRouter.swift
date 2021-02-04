@@ -42,30 +42,16 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>, Ro
 
 extension RootRouter {
     
-//    func attachLoggedOutRIB() {
-//        let loggedOutRouter = self.loggedOutBuilder.build(withListener: self.interactor)
-//        self.loggedOutRouter = loggedOutRouter
-//        self.attachChild(loggedOutRouter)
-//        self.viewController.present(viewController: loggedOutRouter.viewControllable)
-//    }
-    
     func detachLoggedOutRIB() {
-        print("얍")
+        print("얍1")
         guard let router = self.loggedOutRouter else { return }
         viewController.dismiss(viewController: router.viewControllable)
         detachChild(router)
         self.loggedOutRouter = nil
     }
     
-//    func attachLoggedInRIB() {
-//        let loggedInRouter = self.loggedInBuilder.build(withListener: self.interactor)
-//        self.loggedInRouter = loggedInRouter
-//        self.attachChild(loggedInRouter)
-//        self.viewController.present(viewController: loggedInRouter.viewControllable)
-//    }
-    
     func detachLoggedInRIB() {
-        print("얍")
+        print("얍2")
         guard let router = self.loggedInRouter else { return }
         viewController.dismiss(viewController: router.viewControllable)
         detachChild(router)
@@ -84,5 +70,18 @@ extension RootRouter {
         self.loggedOutRouter = loggedOutRouter
         self.attachChild(loggedOutRouter)
         self.viewController.present(viewController: loggedOutRouter.viewControllable)
+    }
+    
+    func switchLoggInOutRIB() {
+        if self.loggedOutRouter == nil {
+            print("1")
+            detachLoggedInRIB()
+            attatchLoggedOutRIB()
+        }
+        else {
+            print("2")
+            detachLoggedOutRIB()
+            attatchLoggedInRIB()
+        }
     }
 }

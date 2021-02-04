@@ -14,6 +14,7 @@ protocol RootRouting: ViewableRouting {
     func detachLoggedInRIB()
     func attatchLoggedInRIB()
     func attatchLoggedOutRIB()
+    func switchLoggInOutRIB()
 }
 
 protocol RootPresentable: Presentable {
@@ -61,13 +62,11 @@ extension RootInteractor {
     
     func switchLoggedInToLoggedOut() {
         print("switchLoggedInToLoggedOut")
-        self.router?.detachLoggedInRIB()
-//        self.router?.attatchLoggedOutRIB()
+        self.router?.switchLoggInOutRIB()
     }
     
     func switchLoggedOutToLoggedIn() {
         print("switchLoggedOutToLoggedIn")
-        self.router?.detachLoggedOutRIB()
-//        self.router?.attatchLoggedInRIB()
+        self.router?.switchLoggInOutRIB()
     }
 }
